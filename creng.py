@@ -27,6 +27,10 @@ SAMPLES = 200
 def logisticMap(x:float, alpha: (int, float)) -> float:
 	return(1/(1 + np.e**(-alpha*x)))
 
+def getScore(user_id: int, topics: list, scores: dict) -> float:
+	return(
+		np.mean([scores[topic][user_id] for topic in topics])
+	)
 
 ##
 ## SIMULATION HELPERS
@@ -102,3 +106,10 @@ for topic in TOPICS:
 			x=((topic_page_rank[user]/topic_page_rank_mean)-1),
 			alpha=LOGISTIC_MAP_ALPHA_COEF
 		)
+
+
+getScore(
+	user_id=3,
+	topics=['climate','popcorn'],
+	scores=page_ranks
+)
